@@ -57,7 +57,7 @@ export const handleAuthenticationError = async (
     if (!clientLogoutRequest) {
       clientLogoutRequest = fetch("/api/auth/logout", {
         method: "POST",
-        body: JSON.stringify({ force: true }),
+        body: null, // luon luon thanh cong ke ca accessToken khong hop le
         headers: {
           ...baseHeaders,
         } as any,
@@ -67,7 +67,7 @@ export const handleAuthenticationError = async (
       } catch (error) {
       } finally {
         localStorage.removeItem("accessToken")
-        localStorage.removeItem("accessTokenExpiresAt")
+        localStorage.removeItem("refreshToken")
         clientLogoutRequest = null
         location.href = "/login"
       }
@@ -86,13 +86,16 @@ export const handleClientSideLogic = <TypeResponse>(
   url: string,
   payload: TypeResponse
 ): void => {
+  const normalizePathUrl = normalizePath(url);
   if (
-    ["auth/login", "auth/register"].some((item) => item === normalizePath(url))
+    normalizePathUrl === "api/auth/login"
   ) {
-    const { token, expiresAt } = (payload as LoginResType).data;
-    localStorage.setItem("accessToken", token)
-    localStorage.setItem("accessTokenExpiresAt", expiresAt)
-  } else if ("auth/logout" === normalizePath(url)) {
+    const { accessToken, refreshToken } = (payload as LoginResType).data;
+    localStorage.setItem("accessToken", accessToken)
+    localStorage.setItem("refreshToken", refreshToken)
+  }
+  // logout
+  else if (normalizePathUrl === "api/auth/logout") {
     localStorage.clear()
   }
 };
