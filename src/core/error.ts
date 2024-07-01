@@ -1,3 +1,5 @@
+import { STATUS_ERROR } from "@/constant/status-error"
+
 export type EntityErrorPayload = {
   message: string
   errors: {
@@ -12,24 +14,24 @@ export class HttpError extends Error {
     message: string
     [key: string]: any
   }
-  constructor({ status, payload }: { status: number; payload: any }) {
-    super('Http Error')
+  constructor({ status, payload, message }: { status: number; payload: any, message?  : string }) {
+    super(message)
     this.status = status
     this.payload = payload
   }
 }
 
 export class EntityError extends HttpError {
-  status: 422
+  status: typeof STATUS_ERROR.ENTITY_ERROR_STATUS
   payload: EntityErrorPayload
   constructor({
     status,
     payload
   }: {
-    status: 422
+    status: typeof STATUS_ERROR.ENTITY_ERROR_STATUS
     payload: EntityErrorPayload
   }) {
-    super({ status, payload })
+    super({ status, payload, message: 'error instance' })
     this.status = status
     this.payload = payload
   }

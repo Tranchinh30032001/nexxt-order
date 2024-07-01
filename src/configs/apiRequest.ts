@@ -1,5 +1,6 @@
 import { STATUS_ERROR } from '@/constant/status-error'
 import { EntityError, EntityErrorPayload, HttpError } from '@/core/error'
+import { normalizePath } from '@/utils'
 import { CustomOptions, getAuthorizationHeader, getBaseHeaders, getBaseUrl, handleAuthenticationError, handleBodyData, handleClientSideLogic, isClient } from '@/utils/httpUtils'
 
 export const request = async <TypeResponse>(
@@ -16,7 +17,7 @@ export const request = async <TypeResponse>(
   }
 
   const baseUrl = getBaseUrl(options)
-  const fullUrl = url.startsWith('/') ? `${baseUrl}${url}` : `${baseUrl}/${url}`
+  const fullUrl = `${baseUrl}/${normalizePath(url)}`
 
   const res = await fetch(fullUrl, {
     ...options,
@@ -48,7 +49,7 @@ export const request = async <TypeResponse>(
     }
   }
 
-  if (isClient()) {
+  if (isClient) {
     handleClientSideLogic(url, payload)
   }
   return data
