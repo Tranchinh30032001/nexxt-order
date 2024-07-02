@@ -33,6 +33,7 @@
       --ring: 222.2 84% 4.9%;
 
       --radius: 0.5rem;
+      --height-header: 5rem
     }
 
     .dark {
@@ -72,5 +73,11 @@
     }
     body {
       @apply bg-background text-foreground;
+    }
+  }
+
+  @layer components {
+    .container {
+      @apply px-4 max-w-[100vw];
     }
   }

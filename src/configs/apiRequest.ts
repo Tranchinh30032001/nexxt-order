@@ -1,6 +1,6 @@
 import { STATUS_ERROR } from '@/constant/status-error'
 import { EntityError, EntityErrorPayload, HttpError } from '@/core/error'
-import { normalizePath } from '@/utils'
+import { normalizePath } from '@/utils/common'
 import { CustomOptions, getAuthorizationHeader, getBaseHeaders, getBaseUrl, handleAuthenticationError, handleBodyData, handleClientSideLogic, isClient } from '@/utils/httpUtils'
 
 export const request = async <TypeResponse>(
