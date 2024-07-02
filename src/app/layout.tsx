@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./provider/theme-provider";
 import TanstackProvider from "./provider/tanstack-query-provider";
+import { ModeToggle } from "@/components/ToogleDarkMode";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,7 +28,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <TanstackProvider>
+            <ModeToggle />
             {children}
+            <Toaster />
           </TanstackProvider>
         </ThemeProvider>
       </body>

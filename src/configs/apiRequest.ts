@@ -52,5 +52,6 @@ export const request = async <TypeResponse>(
   if (isClient) {
     handleClientSideLogic(url, payload)
   }
+
   return data
 }
