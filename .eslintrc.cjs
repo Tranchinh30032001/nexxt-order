@@ -17,7 +17,7 @@ module.exports = {
     'space-before-blocks': ['warn', 'always'],
     'object-curly-spacing': [1, 'always'],
     'indent': ['warn', 2],
-    'semi': [1, 'always'],
+    'semi': 0,
     'quotes': ['warn', 'single'],
     'array-bracket-spacing': 1,
     'linebreak-style': 0,

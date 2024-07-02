@@ -3,8 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./provider/theme-provider";
 import TanstackProvider from "./provider/tanstack-query-provider";
-import { ModeToggle } from "@/components/ToogleDarkMode";
 import { Toaster } from "@/components/ui/toaster";
+import Header from "@/containers/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <body className={inter.className}>
         <ThemeProvider
           attribute='class'
@@ -28,7 +28,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <TanstackProvider>
-            <ModeToggle />
+            <Header />
             {children}
             <Toaster />
           </TanstackProvider>

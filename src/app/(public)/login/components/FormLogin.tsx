@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { LoginBody, LoginBodyType } from "@/schema/auth";
 import { useLoginMutation } from "@/services/auth";
 import { toast } from "@/components/ui/use-toast";
-import { handleErrorApi } from "@/utils";
+import { handleErrorApi } from "@/utils/common";
 
 const FormLogin = () => {
 
@@ -68,7 +68,7 @@ const FormLogin = () => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input type="password" {...field} />
+                  <Input type="password" {...field} autoComplete='additional-name' />
                 </FormControl>
                 <FormMessage />
               </FormItem>

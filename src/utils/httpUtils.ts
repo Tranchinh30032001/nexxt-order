@@ -1,6 +1,6 @@
 import envConfig from "@/configs/config-env";
 import { redirect } from "next/navigation";
-import { normalizePath } from ".";
+import { normalizePath } from "./common";
 import { LoginResType } from "@/schema/auth";
 
 let clientLogoutRequest: null | Promise<any> = null;
