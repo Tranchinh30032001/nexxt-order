@@ -4,8 +4,8 @@ import { cookies } from "next/headers";
 import jwt from 'jsonwebtoken'
 import { HttpError } from "@/core/error";
 
-export async function POST(requesst: Request) {
-    const body = (await requesst.json()) as LoginBodyType;
+export async function POST(request: Request) {
+    const body = (await request.json()) as LoginBodyType;
     const cookieStore = cookies()
     try {
         const { payload } = await authApiRequest.s_Login(body)
