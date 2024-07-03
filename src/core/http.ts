@@ -1,4 +1,5 @@
 import { request } from "@/configs/apiRequest";
+import { getHandler, postHandler } from "@/utils/asyncHandler";
 import { CustomOptions } from "@/utils/httpUtils";
 
 class Http {
@@ -6,7 +7,9 @@ class Http {
       url: string,
       options?: Omit<CustomOptions, 'body'> | undefined
     ) {
-      return request<Response>('GET', url, options)
+      // return getHandler<Response>({ url, options })
+    return request<Response>('GET', url, options)
+
     }
 
     static post<Response>(
@@ -14,7 +17,9 @@ class Http {
       body: any,
       options?: Omit<CustomOptions, 'body'> | undefined
     ) {
-      return request<Response>('POST', url, { ...options, body })
+      return postHandler<Response>({ url, body, options })
+    // return request<Response>('POST', url, { ...options, body })
+
     }
 
     static put<Response>(

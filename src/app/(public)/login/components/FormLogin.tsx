@@ -17,10 +17,11 @@ import { LoginBody, LoginBodyType } from "@/schema/auth";
 import { useLoginMutation } from "@/services/auth";
 import { toast } from "@/components/ui/use-toast";
 import { handleErrorApi } from "@/utils/common";
+import { useRouter } from "next/navigation";
 
 const FormLogin = () => {
-
   const loginMutation = useLoginMutation()
+  const router = useRouter()
 
   const form = useForm<LoginBodyType>({
     resolver: zodResolver(LoginBody),
@@ -37,6 +38,7 @@ const FormLogin = () => {
       toast({
         description: result.payload.message,
       })
+      router.push('/manage/dashboard')
     } catch (error) {
       handleErrorApi({
         error,
