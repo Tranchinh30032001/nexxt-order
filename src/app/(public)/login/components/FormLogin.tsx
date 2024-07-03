@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -14,14 +13,28 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { LoginBody, LoginBodyType } from "@/schema/auth";
-import { useLoginMutation } from "@/services/auth";
+import { useLoginMutation, useLogoutMutation } from "@/services/auth";
 import { toast } from "@/components/ui/use-toast";
-import { handleErrorApi } from "@/utils/common";
-import { useRouter } from "next/navigation";
+import { getRefreshToken, handleErrorApi } from "@/utils/common";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { isClient } from "@/utils/httpUtils";
 
 const FormLogin = () => {
   const loginMutation = useLoginMutation()
+  const logoutMutation = useLogoutMutation()
   const router = useRouter()
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    if (searchParams.get('tokenExpired')) {
+      const refreshToken = getRefreshToken() as string
+      logoutMutation.mutateAsync({ refreshToken })
+    }
+    if (isClient) {
+      localStorage.clear()
+    }
+  }, [])
 
   const form = useForm<LoginBodyType>({
     resolver: zodResolver(LoginBody),

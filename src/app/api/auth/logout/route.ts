@@ -14,7 +14,6 @@ export async function POST() {
       refreshToken,
       accessToken
     })
-
     return Response.json(result.payload)
   } catch (error) {
       return Response.json({
