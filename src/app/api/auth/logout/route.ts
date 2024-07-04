@@ -8,13 +8,13 @@ export async function POST() {
   const refreshToken = cookieStore.get('refreshToken')?.value as string
   cookieStore.delete('accessToken')
   cookieStore.delete('refreshToken')
+  cookieStore.delete('isLogin')
 
   try {
     const result = await authApiRequest.s_Logout({
       refreshToken,
       accessToken
     })
-
     return Response.json(result.payload)
   } catch (error) {
       return Response.json({

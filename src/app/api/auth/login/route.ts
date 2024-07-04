@@ -3,6 +3,7 @@ import { LoginBodyType } from "@/schema/auth";
 import { cookies } from "next/headers";
 import jwt from 'jsonwebtoken'
 import { HttpError } from "@/core/error";
+import { GLOBAL_VARIABLE } from "@/constant/common";
 
 export async function POST(request: Request) {
     const body = (await request.json()) as LoginBodyType;
@@ -27,6 +28,11 @@ export async function POST(request: Request) {
             sameSite: 'lax',
             secure: true,
             expires: decodeRefreshToken.exp * 1000
+        })
+
+        cookieStore.set('isLogin', 'true', {
+          path: '/',
+          expires: new Date().getTime() + GLOBAL_VARIABLE.TIME_IS_LOGIN
         })
 
         return Response.json(payload)

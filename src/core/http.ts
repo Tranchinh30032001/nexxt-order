@@ -7,9 +7,7 @@ class Http {
       url: string,
       options?: Omit<CustomOptions, 'body'> | undefined
     ) {
-      // return getHandler<Response>({ url, options })
-    return request<Response>('GET', url, options)
-
+      return getHandler<Response>({ url, options })
     }
 
     static post<Response>(
@@ -18,8 +16,6 @@ class Http {
       options?: Omit<CustomOptions, 'body'> | undefined
     ) {
       return postHandler<Response>({ url, body, options })
-    // return request<Response>('POST', url, { ...options, body })
-
     }
 
     static put<Response>(

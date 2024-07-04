@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -14,14 +13,28 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { LoginBody, LoginBodyType } from "@/schema/auth";
-import { useLoginMutation } from "@/services/auth";
+import { useLoginMutation, useLogoutMutation } from "@/services/auth";
 import { toast } from "@/components/ui/use-toast";
-import { handleErrorApi } from "@/utils/common";
-import { useRouter } from "next/navigation";
+import { getRefreshToken, handleErrorApi } from "@/utils/common";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useRef } from "react";
 
 const FormLogin = () => {
   const loginMutation = useLoginMutation()
+  const logoutMutation = useLogoutMutation()
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const flagLogout = useRef<Boolean | Promise<any>>(false)
+
+  useEffect(() => {
+    // when accessToken expired
+    if (searchParams.get('tokenExpired') && !flagLogout.current) {
+      const refreshToken = getRefreshToken() as string
+      flagLogout.current = logoutMutation.mutateAsync({ refreshToken }).then(() => {
+        flagLogout.current = false
+      })
+    }
+  }, [])
 
   const form = useForm<LoginBodyType>({
     resolver: zodResolver(LoginBody),
@@ -48,7 +61,7 @@ const FormLogin = () => {
   }
 
   return (
-    <Form {...form} >
+      <Form {...form} >
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8" noValidate>
           <FormField
             control={form.control}
