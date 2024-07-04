@@ -21,6 +21,7 @@ export const authApiRequest = {
         Authorization: `Bearer ${body.accessToken}`
       }
     }),
+    // when call this api localstorage with be clear
     logout: (body: LogoutBodyType) => Http.post<LogoutBodyType>('/api/auth/logout', body, {
       baseUrl: ''
     })

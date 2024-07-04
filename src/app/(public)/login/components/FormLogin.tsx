@@ -17,22 +17,22 @@ import { useLoginMutation, useLogoutMutation } from "@/services/auth";
 import { toast } from "@/components/ui/use-toast";
 import { getRefreshToken, handleErrorApi } from "@/utils/common";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-import { isClient } from "@/utils/httpUtils";
+import { useEffect, useRef } from "react";
 
 const FormLogin = () => {
   const loginMutation = useLoginMutation()
   const logoutMutation = useLogoutMutation()
   const router = useRouter()
   const searchParams = useSearchParams()
+  const flagLogout = useRef<Boolean | Promise<any>>(false)
 
   useEffect(() => {
-    if (searchParams.get('tokenExpired')) {
+    // when accessToken expired
+    if (searchParams.get('tokenExpired') && !flagLogout.current) {
       const refreshToken = getRefreshToken() as string
-      logoutMutation.mutateAsync({ refreshToken })
-    }
-    if (isClient) {
-      localStorage.clear()
+      flagLogout.current = logoutMutation.mutateAsync({ refreshToken }).then(() => {
+        flagLogout.current = false
+      })
     }
   }, [])
 
@@ -61,7 +61,7 @@ const FormLogin = () => {
   }
 
   return (
-    <Form {...form} >
+      <Form {...form} >
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8" noValidate>
           <FormField
             control={form.control}

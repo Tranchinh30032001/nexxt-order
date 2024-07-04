@@ -14,7 +14,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar"
-import SpanLogout from '@/components/SpanLogout'
+import ButtonLogout from '@/components/ButtonLogout'
 
 const DropDownUser = () => {
   return (
@@ -37,9 +37,7 @@ const DropDownUser = () => {
         </DropdownMenuItem>
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
-      <DropdownMenuItem>
-        <SpanLogout />
-      </DropdownMenuItem>
+        <ButtonLogout />
     </DropdownMenuContent>
   </DropdownMenu>
   )
