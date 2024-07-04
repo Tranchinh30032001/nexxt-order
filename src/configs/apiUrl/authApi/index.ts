@@ -1,4 +1,5 @@
 import Http from "@/core/http";
+import { AccountResType } from "@/schema/account";
 import { LoginBodyType, LoginResType, LogoutBodyType } from "@/schema/auth";
 
 /* Lưu ý các API được call từ phía client thì đã tự động được truyền accessToken vào
@@ -25,4 +26,13 @@ export const authApiRequest = {
     logout: (body: LogoutBodyType) => Http.post<LogoutBodyType>('/api/auth/logout', body, {
       baseUrl: ''
     })
+}
+
+export const accountApiRequest = {
+  s_Me: (accessToken: string) => Http.get<AccountResType>('/accounts/me', {
+    headers:{
+      Authorization: `Bearer ${accessToken}`
+    }
+  }),
+  me: () => Http.get<AccountResType>('/accounts/me')
 }

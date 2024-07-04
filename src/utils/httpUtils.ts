@@ -45,7 +45,6 @@ export const getBaseUrl = (options: CustomOptions | undefined): string => {
 };
 
 export const handleAuthenticationError = async (
-  options: CustomOptions | undefined,
   baseHeaders: { [key: string]: string }
 ): Promise<void> => {
   if (isClient) {
@@ -61,8 +60,7 @@ export const handleAuthenticationError = async (
         await clientLogoutRequest
       } catch (error) {
       } finally {
-        localStorage.removeItem("accessToken")
-        localStorage.removeItem("refreshToken")
+        localStorage.clear()
         clientLogoutRequest = null
         location.href = "/login"
       }
@@ -70,10 +68,7 @@ export const handleAuthenticationError = async (
   }
   // server
   else {
-    const accessToken = (options?.headers as any)?.Authorization.split(
-      "Bearer "
-    )[1];
-    redirect(`/logout?accessToken=${accessToken}`)
+    redirect(`/login?forceLogin=true`)
   }
 };
 

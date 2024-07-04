@@ -18,6 +18,7 @@ import { toast } from "@/components/ui/use-toast";
 import { getRefreshToken, handleErrorApi } from "@/utils/common";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
+import Cookies from "js-cookie";
 
 const FormLogin = () => {
   const loginMutation = useLoginMutation()
@@ -28,7 +29,8 @@ const FormLogin = () => {
 
   useEffect(() => {
     // when accessToken expired
-    if (searchParams.get('tokenExpired') && !flagLogout.current) {
+    const isLogin = Cookies.get('isLogin') // tránh trường hợp refresh thì nó lại call api logout
+    if (searchParams.get('forceLogin') && isLogin && !flagLogout.current) {
       const refreshToken = getRefreshToken() as string
       flagLogout.current = logoutMutation.mutateAsync({ refreshToken }).then(() => {
         flagLogout.current = false
