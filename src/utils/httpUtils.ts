@@ -68,7 +68,7 @@ export const handleAuthenticationError = async (
   }
   // server
   else {
-    redirect(`/login?forceLogin=true`)
+    redirect(`/login?forceLogout=true`)
   }
 };
 

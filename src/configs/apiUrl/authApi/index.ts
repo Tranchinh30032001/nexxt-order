@@ -1,6 +1,6 @@
 import Http from "@/core/http";
 import { AccountResType } from "@/schema/account";
-import { LoginBodyType, LoginResType, LogoutBodyType } from "@/schema/auth";
+import { LoginBodyType, LoginResType, LogoutBodyType, RefreshTokenBodyType, RefreshTokenResType } from "@/schema/auth";
 
 /* Lưu ý các API được call từ phía client thì đã tự động được truyền accessToken vào
 Authorization.
@@ -23,7 +23,11 @@ export const authApiRequest = {
       }
     }),
     // when call this api localstorage with be clear
-    logout: (body: LogoutBodyType) => Http.post<LogoutBodyType>('/api/auth/logout', body, {
+    logout: () => Http.post<LogoutBodyType>('/api/auth/logout', null, {
+      baseUrl: ''
+    }),
+    s_RefreshToken: (body: RefreshTokenBodyType) => Http.post<RefreshTokenResType>('/auth/refresh-token', body),
+    refreshToken: () => Http.post<RefreshTokenResType>('/api/auth/refresh-token', null, {
       baseUrl: ''
     })
 }

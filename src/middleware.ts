@@ -12,7 +12,7 @@ export function middleware(request: NextRequest) {
 
   // Đã đăng nhập nhưng accessToken hết hạn
   if (isAuth && !pathname.startsWith('/login') && !accessToken) {
-    return NextResponse.redirect(new URL('/login?forceLogin=true', request.url))
+    return NextResponse.redirect(new URL('/login?forceLogout=true', request.url))
   }
 
   // Chưa đăng nhập thì không cho vào private paths
