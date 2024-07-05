@@ -1,3 +1,4 @@
 export const GLOBAL_VARIABLE = {
-   TIME_IS_LOGIN: 1000 * 60 * 60 * 24 * 365
+   TIME_IS_LOGIN: 1000 * 60 * 60 * 24 * 365,
+   PERIOD_REFRRESH_TOKEN: 1000 * 60
 } as const

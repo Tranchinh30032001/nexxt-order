@@ -2,6 +2,7 @@ import envConfig from "@/configs/config-env";
 import { redirect } from "next/navigation";
 import { normalizePath } from "./common";
 import { LoginResType } from "@/schema/auth";
+import { authApiRequest } from "@/configs/apiUrl/authApi";
 
 let clientLogoutRequest: null | Promise<any> = null;
 export type CustomOptions = Omit<RequestInit, 'method'> & {
@@ -49,15 +50,8 @@ export const handleAuthenticationError = async (
 ): Promise<void> => {
   if (isClient) {
     if (!clientLogoutRequest) {
-      clientLogoutRequest = fetch("/api/auth/logout", {
-        method: "POST",
-        body: null, // luon luon thanh cong ke ca accessToken khong hop le
-        headers: {
-          ...baseHeaders,
-        } as any,
-      });
       try {
-        await clientLogoutRequest
+        await authApiRequest.logout()
       } catch (error) {
       } finally {
         localStorage.clear()
@@ -68,7 +62,7 @@ export const handleAuthenticationError = async (
   }
   // server
   else {
-    redirect(`/login?forceLogout=true`)
+    // redirect(`/login?forceLogout=true`)
   }
 };
 

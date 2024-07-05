@@ -44,3 +44,7 @@ export const decodeJWT = <Payload = any>(token: string) => {
 export const getAccessToken = () => isClient ? localStorage.getItem("accessToken") : undefined;
 
 export const getRefreshToken = () => isClient ? localStorage.getItem("refreshToken") : undefined;
+
+export const setAccessToken = (accessToken: string) => isClient && localStorage.setItem('accessToken', accessToken)
+
+export const setRefreshToken = (refreshToken: string) => isClient && localStorage.setItem('refreshToken', refreshToken)

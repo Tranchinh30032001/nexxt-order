@@ -1,6 +1,7 @@
 import Http from "@/core/http";
 import { AccountResType } from "@/schema/account";
 import { LoginBodyType, LoginResType, LogoutBodyType, RefreshTokenBodyType, RefreshTokenResType } from "@/schema/auth";
+import { DishListResType } from "@/schema/dish";
 
 /* Lưu ý các API được call từ phía client thì đã tự động được truyền accessToken vào
 Authorization.
@@ -27,6 +28,7 @@ export const authApiRequest = {
       baseUrl: ''
     }),
     s_RefreshToken: (body: RefreshTokenBodyType) => Http.post<RefreshTokenResType>('/auth/refresh-token', body),
+
     refreshToken: () => Http.post<RefreshTokenResType>('/api/auth/refresh-token', null, {
       baseUrl: ''
     })
@@ -39,4 +41,8 @@ export const accountApiRequest = {
     }
   }),
   me: () => Http.get<AccountResType>('/accounts/me')
+}
+
+export const dishesApiRequest = {
+  getAllDishes: () => Http.get<DishListResType>('/dishes')
 }

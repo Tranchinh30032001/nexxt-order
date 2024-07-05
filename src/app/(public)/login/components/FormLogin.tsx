@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { LoginBody, LoginBodyType } from "@/schema/auth";
 import { useLoginMutation, useLogoutMutation } from "@/services/auth";
 import { toast } from "@/components/ui/use-toast";
-import { getRefreshToken, handleErrorApi } from "@/utils/common";
+import { handleErrorApi } from "@/utils/common";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import Cookies from "js-cookie";
@@ -31,8 +31,7 @@ const FormLogin = () => {
     // when accessToken expired
     const isLogin = Cookies.get('isLogin') // tránh trường hợp refresh thì nó lại call api logout
     if (searchParams.get('forceLogout') && isLogin && !flagLogout.current) {
-      const refreshToken = getRefreshToken() as string
-      flagLogout.current = logoutMutation.mutateAsync({ refreshToken }).then(() => {
+      flagLogout.current = logoutMutation.mutateAsync().then(() => {
         flagLogout.current = false
       })
     }
@@ -53,7 +52,7 @@ const FormLogin = () => {
       toast({
         description: result.payload.message,
       })
-      router.push('/manage/dashboard')
+      router.push('/dashboard')
     } catch (error) {
       handleErrorApi({
         error,

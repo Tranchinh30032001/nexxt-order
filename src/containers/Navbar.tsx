@@ -16,11 +16,6 @@ const navItems = [
     link: '/orders'
   },
   {
-    name: 'Đăng nhập',
-    link: '/login',
-    authRequired: false
-  },
-  {
     name: 'Quản lý',
     link: '/dashboard',
     authRequired: true
