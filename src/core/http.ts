@@ -12,7 +12,7 @@ class Http {
 
     static post<Response>(
       url: string,
-      body: any,
+      body?: any,
       options?: Omit<CustomOptions, 'body'> | undefined
     ) {
       return postHandler<Response>({ url, body, options })
@@ -20,7 +20,7 @@ class Http {
 
     static put<Response>(
       url: string,
-      body: any,
+      body?: any,
       options?: Omit<CustomOptions, 'body'> | undefined
     ) {
       return request<Response>('PUT', url, { ...options, body })
