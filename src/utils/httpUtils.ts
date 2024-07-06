@@ -4,10 +4,9 @@ import { normalizePath } from "./common";
 import { LoginResType } from "@/schema/auth";
 import { authApiRequest } from "@/configs/apiUrl/authApi";
 
-let clientLogoutRequest: null | Promise<any> = null;
 export type CustomOptions = Omit<RequestInit, 'method'> & {
-    baseUrl?: string | undefined
-  }
+  baseUrl?: string | undefined
+}
 
 export const isClient = typeof window !== "undefined";
 
@@ -45,24 +44,25 @@ export const getBaseUrl = (options: CustomOptions | undefined): string => {
     : options.baseUrl;
 };
 
-export const handleAuthenticationError = async (
-  baseHeaders: { [key: string]: string }
-): Promise<void> => {
+export const handleAuthenticationError = async() => {
   if (isClient) {
-    if (!clientLogoutRequest) {
-      try {
-        await authApiRequest.logout()
-      } catch (error) {
-      } finally {
-        localStorage.clear()
-        clientLogoutRequest = null
-        location.href = "/login"
-      }
+    try {
+      // xóa token trên cookie
+      await authApiRequest.logout()
+    } catch(error) {
+      localStorage.clear()
+    } finally {
+      location.href = '/login'
     }
   }
   // server
   else {
-    // redirect(`/login?forceLogout=true`)
+    /*
+    - Nếu call api ở server bị lỗi 401 (trong trường hợp token hợp lệ) thì chuyển về màn /login
+    có thêm params là forceLogout để làm flag ở màn login, sao cho call API logout để xóa toàn bộ
+    thông tin token có ở trong cookie và localstorage
+    */
+    redirect(`/login?forceLogout=true`)
   }
 };
 

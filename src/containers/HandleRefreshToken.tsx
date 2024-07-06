@@ -6,6 +6,7 @@ import { publicPath } from "@/middleware";
 import { usePathname } from "next/navigation";
 import { authApiRequest } from "@/configs/apiUrl/authApi";
 import Cookies from "js-cookie";
+import { GLOBAL_VARIABLE } from "@/constant/common";
 
 const HandleRefreshToken = () => {
   const pathName = usePathname();
@@ -34,7 +35,7 @@ const HandleRefreshToken = () => {
          await flagRefreshToken.current
          flagRefreshToken.current = false
         }
-      }, 1000 * 60 * 4);
+      }, GLOBAL_VARIABLE.TIME_TO_REFRESH_TOKEN);
     }
 
     return () => {
