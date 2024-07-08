@@ -5,6 +5,5 @@ export const useGetAllDishes = () => {
   return useQuery({
     queryKey: ['getAllDishes'],
     queryFn: dishesApiRequest.getAllDishes,
-    staleTime: 0
   })
 }
