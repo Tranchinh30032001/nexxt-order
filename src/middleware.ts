@@ -23,6 +23,7 @@ export function middleware(request: NextRequest) {
   if (isAuth && isProtectedRoute && !accessToken && refreshToken) {
     const url = new URL('/refresh-token', request.url)
     url.searchParams.set('redirect', pathname)
+    url.searchParams.set('refreshToken', refreshToken)
     return NextResponse.redirect(url)
   }
 
