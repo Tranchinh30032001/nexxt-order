@@ -16,14 +16,13 @@ import { LoginBody, LoginBodyType } from "@/schema/auth";
 import { useLoginMutation, useLogoutMutation } from "@/services/auth";
 import { toast } from "@/components/ui/use-toast";
 import { handleErrorApi } from "@/utils/common";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import Cookies from "js-cookie";
 
 const FormLogin = () => {
   const loginMutation = useLoginMutation()
   const logoutMutation = useLogoutMutation()
-  const router = useRouter()
   const searchParams = useSearchParams()
   const flagLogout = useRef<Boolean | Promise<any>>(false)
 
@@ -52,7 +51,7 @@ const FormLogin = () => {
       toast({
         description: result.payload.message,
       })
-      router.push('/dashboard')
+      location.href = '/dashboard'
     } catch (error) {
       handleErrorApi({
         error,
