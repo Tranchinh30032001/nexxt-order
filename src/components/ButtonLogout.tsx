@@ -7,13 +7,13 @@ import { useRouter } from "next/navigation";
 import React from "react";
 
 const ButtonLogout = () => {
-  const router = useRouter();
+  const router = useRouter()
   const logoutMutation = useLogoutMutation();
   const handleLogout = async () => {
     if (logoutMutation.isPending) return;
     try {
       await logoutMutation.mutateAsync();
-      router.push("/login");
+      router.push('/login')
     } catch (error) {
       handleErrorApi({
         error
