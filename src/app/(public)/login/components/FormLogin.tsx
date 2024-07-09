@@ -19,11 +19,15 @@ import { handleErrorApi } from "@/utils/common";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import Cookies from "js-cookie";
+import { useBoundStore } from "@/core/zustand";
+import { useRouter } from "next/navigation";
 
 const FormLogin = () => {
+  const router = useRouter()
   const loginMutation = useLoginMutation()
   const logoutMutation = useLogoutMutation()
   const searchParams = useSearchParams()
+  const setIsAuth = useBoundStore((state) => state.setIsAuth);
   const flagLogout = useRef<Boolean | Promise<any>>(false)
 
   useEffect(() => {
@@ -51,7 +55,8 @@ const FormLogin = () => {
       toast({
         description: result.payload.message,
       })
-      location.href = '/dashboard'
+      setIsAuth(true)
+      router.push('/dashboard')
     } catch (error) {
       handleErrorApi({
         error,

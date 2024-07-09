@@ -3,15 +3,17 @@
 import { useLogoutMutation } from "@/services/auth";
 import { handleErrorApi } from "@/utils/common";
 import { DropdownMenuGroup, DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const ButtonLogout = () => {
+  const router = useRouter()
   const logoutMutation = useLogoutMutation();
   const handleLogout = async () => {
     if (logoutMutation.isPending) return;
     try {
       await logoutMutation.mutateAsync();
-      location.href = '/login'
+      router.push('/login')
     } catch (error) {
       handleErrorApi({
         error
