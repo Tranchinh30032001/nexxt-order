@@ -38,7 +38,7 @@ const FormLogin = () => {
         flagLogout.current = false
       })
     }
-  }, [])
+  }, [searchParams])
 
   const form = useForm<LoginBodyType>({
     resolver: zodResolver(LoginBody),
