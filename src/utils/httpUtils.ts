@@ -74,9 +74,13 @@ export const handleClientSideLogic = <TypeResponse>(
   if (
     normalizePathUrl === "api/auth/login"
   ) {
-    const { accessToken, refreshToken } = (payload as LoginResType).data;
+    // const { accessToken, refreshToken } = (payload as LoginResType).data;
+    const { access: accessToken, refresh: refreshToken, active_company_uuid, user_type, dev_flg } = (payload as LoginResType).data;
     localStorage.setItem("accessToken", accessToken)
     localStorage.setItem("refreshToken", refreshToken)
+    localStorage.setItem('active_company_uuid', active_company_uuid)
+    localStorage.setItem('user_type', user_type.toString())
+    localStorage.setItem('dev_flg', dev_flg.toString())
   }
   // logout
   else if (normalizePathUrl === "api/auth/logout") {

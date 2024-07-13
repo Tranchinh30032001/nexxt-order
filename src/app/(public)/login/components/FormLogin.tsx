@@ -43,7 +43,7 @@ const FormLogin = () => {
   const form = useForm<LoginBodyType>({
     resolver: zodResolver(LoginBody),
     defaultValues: {
-      email: '',
+      id: '',
       password: ''
     }
   })
@@ -51,9 +51,9 @@ const FormLogin = () => {
   const onSubmit = async (data: LoginBodyType) => {
     if (loginMutation.isPending) return;
     try {
-      const result = await loginMutation.mutateAsync(data)
+      await loginMutation.mutateAsync(data)
       toast({
-        description: result.payload.message,
+        description: "login success",
       })
       setIsAuth(true)
       router.push('/dashboard')
@@ -70,12 +70,12 @@ const FormLogin = () => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8" noValidate>
           <FormField
             control={form.control}
-            name="email"
+            name="id"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input type="email" placeholder="@gmail.com" {...field} />
+                  <Input type="text" placeholder="@gmail.com" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

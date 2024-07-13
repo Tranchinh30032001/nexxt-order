@@ -7,7 +7,6 @@ const DashBoardPage = async () => {
   const cookieStore = cookies()
   const accessToken = cookieStore.get('accessToken')?.value!
 
-  const result = await accountApiRequest.s_Me(accessToken)
   return (
     <div>DashBoardPage</div>
   )

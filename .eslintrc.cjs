@@ -1,7 +1,7 @@
 module.exports = {
   extends: [
     "next/core-web-vitals",
-    "plugin:@tanstack/eslint-plugin-query/recommended",
+    // "plugin:@tanstack/eslint-plugin-query/recommended",
     "prettier"
   ],
   rules: {

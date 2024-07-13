@@ -10,7 +10,10 @@ export async function POST(request: Request) {
   const cookieStore = cookies();
   try {
     const { payload } = await authApiRequest.s_Login(body);
-    const { accessToken, refreshToken } = payload.data;
+
+    // const { accessToken, refreshToken } = payload.data;
+    const { access: accessToken, refresh: refreshToken } = payload.data;
+    console.log({ accessToken, refreshToken });
     // set token with cookie
     handleSetCookieToken({ cookieStore, accessToken, refreshToken });
 

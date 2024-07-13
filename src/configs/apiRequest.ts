@@ -7,10 +7,9 @@ export const request = async <TypeResponse>(
   method: 'GET' | 'POST' | 'PUT' | 'DELETE',
   url: string,
   options?: CustomOptions | undefined
-) => {
+): Promise<{ payload: TypeResponse, status: number }> => {
   const body = handleBodyData(options)
   const baseHeaders = getBaseHeaders(body)
-
   const authorizationHeader = getAuthorizationHeader()
   if (authorizationHeader) {
     baseHeaders.Authorization = authorizationHeader
