@@ -5,6 +5,7 @@ import { useBoundStore } from '@/core/zustand'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import Cookies from 'js-cookie'
+import { usePathname } from 'next/navigation'
 
 const navItems = [
   {
@@ -30,11 +31,12 @@ const navItems = [
 export const Navbar = () => {
   const isAuth = useBoundStore((state) => state.isAuth)
   const setIsAuth = useBoundStore((state) => state.setIsAuth)
+  const pathname = usePathname()
 
   useEffect(() => {
     const isLogin = Boolean(Cookies.get('isLogin')!)
     setIsAuth(isLogin)
-  }, [])
+  }, [pathname])
 
   return (
     <nav className='space-x-3' >
