@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { LoginBody, LoginBodyType } from "@/schema/auth";
 import { useLoginMutation, useLogoutMutation } from "@/services/auth";
 import { toast } from "@/components/ui/use-toast";
-import { handleErrorApi } from "@/utils/common";
+import { getAccessToken, handleErrorApi } from "@/utils/common";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import Cookies from "js-cookie";
@@ -32,8 +32,8 @@ const FormLogin = () => {
 
   useEffect(() => {
     // when accessToken expired
-    const isLogin = Cookies.get('isLogin') // tránh trường hợp refresh thì nó lại call api logout
-    if (searchParams.get('forceLogout') && isLogin && !flagLogout.current) {
+    const isLogin = getAccessToken() // tránh trường hợp refresh thì nó lại call api logout
+    if (isLogin && !flagLogout.current) {
       flagLogout.current = logoutMutation.mutateAsync().then(() => {
         flagLogout.current = false
       })
