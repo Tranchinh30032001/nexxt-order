@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useReactTable, getCoreRowModel, getFilteredRowModel, getSortedRowModel, ColumnDef, ColumnFiltersState, SortingState } from '@tanstack/react-table';
 
 interface DataTableProps<TData> {
@@ -8,8 +8,8 @@ interface DataTableProps<TData> {
 }
 
 const useCustomTable = <TData extends {}>({ initialData, initialColumns, enableSorting = false }: DataTableProps<TData>) => {
-  const [data, setData] = useState<TData[]>(initialData);
-  const [columns, setColumns] = useState<ColumnDef<TData>[]>(initialColumns);
+  const data = useMemo(() => initialData, [initialData]);
+  const columns = useMemo(() => initialColumns, [initialColumns]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]); // New state for sorting
 
@@ -31,9 +31,7 @@ const useCustomTable = <TData extends {}>({ initialData, initialColumns, enableS
   return {
     tableInstance,
     data,
-    setData,
     columns,
-    setColumns,
     columnFilters,
     setColumnFilters,
     sorting, // Expose sorting state and setter

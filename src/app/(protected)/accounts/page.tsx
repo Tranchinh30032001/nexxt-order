@@ -19,7 +19,7 @@ import { useGetAccounts } from '@/services/accounts'
 
 const AccoutPages = () => {
   const { data } = useGetAccounts()
-  const { tableInstance, columns } = useCustomTable({ initialColumns, initialData: data, enableSorting: true })
+  const { tableInstance, columns } = useCustomTable({ initialColumns, initialData: data ?? [], enableSorting: true })
 
   return (
     <Card>
