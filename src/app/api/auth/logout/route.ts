@@ -21,6 +21,5 @@ export async function POST() {
   } finally {
     cookieStore.delete('accessToken')
     cookieStore.delete('refreshToken')
-    cookieStore.delete('isLogin')
   }
 }

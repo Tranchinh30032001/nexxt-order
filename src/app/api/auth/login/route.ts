@@ -14,11 +14,6 @@ export async function POST(request: Request) {
     // set token with cookie
     handleSetCookieToken({ cookieStore, accessToken, refreshToken });
 
-    cookieStore.set("isLogin", "true", {
-      path: "/",
-      expires: new Date().getTime() + GLOBAL_VARIABLE.TIME_IS_LOGIN
-    });
-
     return Response.json(payload);
   } catch (error) {
     if (error instanceof HttpError) {
