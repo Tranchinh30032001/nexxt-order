@@ -19,6 +19,11 @@ const navItems = [
     name: 'Quản lý',
     link: '/dashboard',
     authRequired: true
+  },
+  {
+    name: 'Accounts',
+    link: '/accounts',
+    authRequired: true
   }
 ]
 
