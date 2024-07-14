@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import Cookies from 'js-cookie'
 import { usePathname } from 'next/navigation'
+import { getAccessToken } from '@/utils/common'
 
 const navItems = [
   {
@@ -34,7 +35,7 @@ export const Navbar = () => {
   const pathname = usePathname()
 
   useEffect(() => {
-    const isLogin = Boolean(Cookies.get('isLogin')!)
+    const isLogin = Boolean(getAccessToken())
     setIsAuth(isLogin)
   }, [pathname])
 
