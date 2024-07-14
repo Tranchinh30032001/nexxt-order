@@ -4,7 +4,6 @@ import React, { useEffect } from 'react'
 import { useBoundStore } from '@/core/zustand'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
-import Cookies from 'js-cookie'
 import { usePathname } from 'next/navigation'
 import { getAccessToken } from '@/utils/common'
 

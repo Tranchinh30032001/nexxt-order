@@ -18,7 +18,6 @@ import { toast } from "@/components/ui/use-toast";
 import { getAccessToken, handleErrorApi } from "@/utils/common";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
-import Cookies from "js-cookie";
 import { useBoundStore } from "@/core/zustand";
 import { useRouter } from "next/navigation";
 
