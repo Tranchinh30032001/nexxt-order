@@ -1,27 +1,26 @@
-import React from 'react'
+'use client'
 
+import React from 'react'
 import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
 import { Input } from '@/components/ui/input'
 import { CirclePlus } from 'lucide-react'
+import TableContainer from '@/components/shared/TableContainer'
+import { initialColumns } from './utils/columnData'
+import useCustomTable from '@/hooks/useCustomTable'
+import { useGetAccounts } from '@/services/accounts'
 
 const AccoutPages = () => {
+  const { data } = useGetAccounts()
+  const { tableInstance, columns } = useCustomTable({ initialColumns, initialData: data, enableSorting: true })
+
   return (
     <Card>
       <CardHeader>
@@ -30,21 +29,17 @@ const AccoutPages = () => {
           Quản lý tài khoản nhân viên
         </CardDescription>
         <CardContent>
-          <div className='flex items-center justify-between' >
+          <div className='flex items-center justify-between mb-5' >
             <div className='max-w-[60%] w-[60%]' >
-              <Input className='fil' />
+              <Input placeholder='search name' onChange={(e) => {
+                tableInstance.getColumn('name')?.setFilterValue(e.target.value)
+              }} />
             </div>
             <Button className='bg-white' >
             <CirclePlus /> Tạo tài khoản
             </Button>
           </div>
-          <div>
-            <Table>
-              <TableHeader>
-
-              </TableHeader>
-            </Table>
-          </div>
+          <TableContainer columns={columns} table={tableInstance} />
         </CardContent>
       </CardHeader>
     </Card>

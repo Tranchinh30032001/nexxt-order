@@ -56,7 +56,7 @@ const FormLogin = () => {
         description: result.payload.message,
       })
       setIsAuth(true)
-      router.push('/dashboard')
+      router.push('/accounts')
     } catch (error) {
       handleErrorApi({
         error,

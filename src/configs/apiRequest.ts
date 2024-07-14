@@ -43,6 +43,8 @@ export const request = async <TypeResponse>(
         }
       )
     } else if (res.status === STATUS_ERROR.AUTHENTICATION_ERROR_STATUS) {
+      console.log({ res, url, authorizationHeader });
+
       await handleAuthenticationError()
     } else {
       throw new HttpError(data)

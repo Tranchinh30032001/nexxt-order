@@ -1,5 +1,5 @@
 import Http from "@/core/http";
-import { AccountResType } from "@/schema/account";
+import { AccountListResType, AccountResType } from "@/schema/account";
 import { LoginBodyType, LoginResType, LogoutBodyType, RefreshTokenBodyType, RefreshTokenResType } from "@/schema/auth";
 import { DishListResType } from "@/schema/dish";
 
@@ -40,7 +40,8 @@ export const accountApiRequest = {
       Authorization: `Bearer ${accessToken}`
     }
   }),
-  me: () => Http.get<AccountResType>('/accounts/me')
+  me: () => Http.get<AccountResType>('/accounts/me'),
+  getAccounts: () => Http.get<AccountListResType>('/accounts')
 }
 
 export const dishesApiRequest = {

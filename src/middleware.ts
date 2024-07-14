@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-const protectedPath = ['/orders', '/dish', '/dashboard', '/']
+const protectedPath = ['/orders', '/dish', '/dashboard', '/accounts', '/']
 export const publicPath = ['/register', '/refresh-token']
 
 // This function can be marked `async` if using `await` inside
@@ -44,5 +44,5 @@ export function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ['/', '/login', '/orders', '/dashboard', '/dish', '/refresh-token']
+  matcher: ['/', '/login', '/orders', '/dashboard', '/dish', '/refresh-token', '/accounts']
 }
