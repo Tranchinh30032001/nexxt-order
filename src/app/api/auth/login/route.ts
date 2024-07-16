@@ -2,7 +2,6 @@ import { authApiRequest } from "@/configs/apiUrl/authApi";
 import { LoginBodyType } from "@/schema/auth";
 import { cookies } from "next/headers";
 import { HttpError } from "@/core/error";
-import { GLOBAL_VARIABLE } from "@/constant/common";
 import { handleSetCookieToken } from "@/utils/handleSetCookieToken";
 
 export async function POST(request: Request) {
@@ -13,11 +12,6 @@ export async function POST(request: Request) {
     const { accessToken, refreshToken } = payload.data;
     // set token with cookie
     handleSetCookieToken({ cookieStore, accessToken, refreshToken });
-
-    cookieStore.set("isLogin", "true", {
-      path: "/",
-      expires: new Date().getTime() + GLOBAL_VARIABLE.TIME_IS_LOGIN
-    });
 
     return Response.json(payload);
   } catch (error) {

@@ -3,12 +3,8 @@ import { cookies } from "next/headers";
 
 export async function POST() {
   const cookieStore = cookies()
-
   const accessToken = cookieStore.get('accessToken')?.value as string
   const refreshToken = cookieStore.get('refreshToken')?.value as string
-  cookieStore.delete('accessToken')
-  cookieStore.delete('refreshToken')
-  cookieStore.delete('isLogin')
 
   try {
     const result = await authApiRequest.s_Logout({
@@ -22,5 +18,8 @@ export async function POST() {
       }, {
         status: 200
       })
+  } finally {
+    cookieStore.delete('accessToken')
+    cookieStore.delete('refreshToken')
   }
 }

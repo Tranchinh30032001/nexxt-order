@@ -21,12 +21,11 @@ const RefreshTokenPage = () => {
       setAccessToken(accessToken)
       setRefreshToken(refreshToken)
       if(destinationUrl) {
-        router.push(destinationUrl)
-        return
+       return router.push(destinationUrl)
       }
-      router.push('/dashboard')
+      return router.push('/dashboard')
     } catch (error) {
-      location.href = '/login?forceLogout=true'
+      location.href = '/login'
     }
   }
 

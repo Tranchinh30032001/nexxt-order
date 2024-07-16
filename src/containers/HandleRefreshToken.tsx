@@ -1,17 +1,16 @@
 'use client'
 
 import { useEffect, useRef } from "react";
-import { setAccessToken, setRefreshToken } from "@/utils/common";
+import { getAccessToken, setAccessToken, setRefreshToken } from "@/utils/common";
 import { publicPath } from "@/middleware";
 import { usePathname } from "next/navigation";
 import { authApiRequest } from "@/configs/apiUrl/authApi";
-import Cookies from "js-cookie";
 import { GLOBAL_VARIABLE } from "@/constant/common";
 
 const HandleRefreshToken = () => {
   const pathName = usePathname();
   const listPublicPath = [...publicPath, "/login"];
-  const isLogin = Cookies.get('isLogin')
+  const isLogin = getAccessToken()
   let flagRefreshToken = useRef<Boolean | Promise<any>>(false)
 
   useEffect(() => {
