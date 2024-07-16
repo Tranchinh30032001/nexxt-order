@@ -2,7 +2,6 @@ import { authApiRequest } from "@/configs/apiUrl/authApi";
 import { LoginBodyType } from "@/schema/auth";
 import { cookies } from "next/headers";
 import { HttpError } from "@/core/error";
-import { GLOBAL_VARIABLE } from "@/constant/common";
 import { handleSetCookieToken } from "@/utils/handleSetCookieToken";
 
 export async function POST(request: Request) {
