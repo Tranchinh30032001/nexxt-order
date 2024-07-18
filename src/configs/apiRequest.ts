@@ -17,6 +17,7 @@ export const request = async <TypeResponse>(
   }
 
   const baseUrl = getBaseUrl(options)
+
   const fullUrl = `${baseUrl}/${normalizePath(url)}`
 
   const res = await fetch(fullUrl, {

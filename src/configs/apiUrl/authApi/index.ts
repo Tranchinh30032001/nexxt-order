@@ -1,7 +1,9 @@
+import { TableType } from "@/app/(protected)/dish/components/ListTable";
 import Http from "@/core/http";
 import { AccountListResType, AccountResType } from "@/schema/account";
 import { LoginBodyType, LoginResType, LogoutBodyType, RefreshTokenBodyType, RefreshTokenResType } from "@/schema/auth";
 import { DishListResType } from "@/schema/dish";
+import { revalidateTag } from "next/cache";
 
 /* Lưu ý các API được call từ phía client thì đã tự động được truyền accessToken vào
 Authorization.
@@ -46,4 +48,22 @@ export const accountApiRequest = {
 
 export const dishesApiRequest = {
   getAllDishes: () => Http.get<DishListResType>('/dishes')
+}
+
+export const tableApiRequest = {
+  getTables: () => Http.get<TableType[]>('/api/table-data/tables', {
+    baseUrl: 'https://64bf79be5ee688b6250d7c34.mockapi.io',
+    next: {
+      tags: ['tables']
+    }
+  }),
+  postTable: (data: any) => Http.post('/api/table-data/tables', data, {
+    baseUrl: 'https://64bf79be5ee688b6250d7c34.mockapi.io'
+  })
+}
+
+export const revalidateApiRequest = {
+  revalidateTag: (tag: string) => Http.get(`/api/auth/revalidate?tag=${tag}`, {
+    baseUrl: ''
+  })
 }

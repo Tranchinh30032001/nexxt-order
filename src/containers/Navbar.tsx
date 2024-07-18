@@ -9,15 +9,15 @@ import { getAccessToken } from '@/utils/common'
 
 const navItems = [
   {
-    name: 'Món ăn',
+    name: 'Dish',
     link: '/dish'
   },
   {
-    name: 'Đơn hàng',
+    name: 'Orders',
     link: '/orders'
   },
   {
-    name: 'Quản lý',
+    name: 'Dashboard',
     link: '/dashboard',
     authRequired: true
   },
@@ -43,7 +43,7 @@ export const Navbar = () => {
       {
         navItems.map((item, index) => {
           return (
-            <Link key={index} href={item.link} prefetch={false} className={cn({
+            <Link key={index} href={item.link} prefetch={isAuth ? true : false} className={cn({
               'hidden': item.authRequired === false && isAuth || item.authRequired === true && !isAuth
             })} >
               {item.name}
