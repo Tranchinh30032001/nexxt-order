@@ -74,7 +74,7 @@ export function FormAddItem() {
         />
         <Button type="submit">Submit</Button>
       </form>
-      { postTableMutation.isPending && <p>Loading...</p> }
+      {/* { postTableMutation.isPending && <p>Loading...</p> } */}
     </Form>
   );
 }

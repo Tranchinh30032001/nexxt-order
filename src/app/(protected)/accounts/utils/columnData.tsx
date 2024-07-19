@@ -3,6 +3,7 @@ import { AccountType } from "@/schema/account"
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown } from "lucide-react"
 import Image from "next/image"
+import Avatar from '@/../public/avatar.png'
 
 export const initialColumns: ColumnDef<AccountType>[] = [
   {
@@ -13,7 +14,9 @@ export const initialColumns: ColumnDef<AccountType>[] = [
     accessorKey: 'avatar',
     header: 'Avatar',
     cell: ({ row }) => (
-      <Image src={row.getValue('avatar')}  alt={'avatar'} width={100} height={100} />
+      row.getValue("avatar")
+      ? <Image src={row.getValue('avatar')} alt={'avatar'} width={100} height={100} />
+      : <Image src={Avatar} alt={'avatar'} width={100} height={100} />
     ),
   },
 

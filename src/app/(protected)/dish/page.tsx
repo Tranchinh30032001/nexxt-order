@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { tableApiRequest } from "@/configs/apiUrl/authApi";
 import { FormAddItem } from "./components/FormAddItem";
+import { Suspense } from "react";
 
 const getTables = (async() => {
   return tableApiRequest.getTables()
@@ -13,6 +14,7 @@ const DishPage = async () => {
     <div>
 
       <FormAddItem />
+      <Suspense fallback={<p>Loading...</p>} >
       {tables.reverse().map((table) => (
         <Card key={table.id}>
           <CardHeader>{table.name}</CardHeader>
@@ -21,6 +23,7 @@ const DishPage = async () => {
           </CardContent>
         </Card>
       ))}
+      </Suspense>
     </div>
   );
 };
