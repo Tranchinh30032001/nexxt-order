@@ -13,7 +13,7 @@ export const initialColumns: ColumnDef<AccountType>[] = [
     accessorKey: 'avatar',
     header: 'Avatar',
     cell: ({ row }) => (
-      <Image src={row.getValue('avatar')}  alt={'avatar'} width={100} height={100} />
+      row.getValue('avatar') ? <Image src={row.getValue('avatar')}  alt={'avatar'} width={100} height={100} />: ''
     ),
   },
 
