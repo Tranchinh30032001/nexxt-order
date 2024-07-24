@@ -5,6 +5,7 @@ import { handleErrorApi } from "@/utils/common";
 import { DropdownMenuGroup, DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { Button } from "./ui/button";
 
 const ButtonLogout = () => {
   const router = useRouter()

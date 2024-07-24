@@ -27,6 +27,8 @@ export const postHandler = async<Response>({ url, options, body }: PropsPost) =>
     return await request<Response>('POST', url, { ...options, body })
   } catch (error: any) {
     if (error.digest?.includes('NEXT_REDIRECT')) {
+      console.log({ error });
+
       throw error;
     }
     throw error;

@@ -19,8 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning={true}>
-      <body className={inter.className}>
+    <html lang="ja" className="scroll-smooth antialiased" suppressHydrationWarning={true}>
+      <body className={`${inter.className} flex min-h-screen flex-col`}>
         <ThemeProvider
           attribute='class'
           defaultTheme="system"
@@ -29,7 +29,9 @@ export default function RootLayout({
         >
           <TanstackProvider>
             <Header />
-            {children}
+            <main className="grow" >
+              {children}
+            </main>
             <Toaster />
           </TanstackProvider>
         </ThemeProvider>

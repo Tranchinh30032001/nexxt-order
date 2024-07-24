@@ -2,10 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import { getAccessToken, setAccessToken, setRefreshToken } from "@/utils/common";
-import { publicPath } from "@/middleware";
 import { usePathname } from "next/navigation";
 import { authApiRequest } from "@/configs/apiUrl/authApi";
 import { GLOBAL_VARIABLE } from "@/constant/common";
+import { publicPath } from "@/middlewares/tokenMiddleware";
 
 const HandleRefreshToken = () => {
   const pathName = usePathname();
