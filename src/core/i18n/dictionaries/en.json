@@ -1,0 +1,26 @@
+{
+  "navigation": {
+    "dish": "Dish",
+    "order": "Order",
+    "dashboard": "Dashboard",
+    "accounts": "Accounts"
+  },
+  "page": {
+    "dashboard": {
+      "title": "Accounts",
+      "description": "Manage employees account",
+      "createAccount": "Create account"
+    },
+    "dish": {
+
+    },
+    "order": {
+
+    },
+    "accounts": {
+      "title": "Accounts",
+      "description": "Manage employees account",
+      "createAccount": "Create account"
+    }
+  }
+}

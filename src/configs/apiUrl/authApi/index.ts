@@ -1,4 +1,4 @@
-import { TableType } from "@/app/(protected)/dish/components/ListTable";
+import { TableType } from "@/app/[lang]/(protected)/dish/components/ListTable";
 import Http from "@/core/http";
 import { AccountListResType, AccountResType } from "@/schema/account";
 import { LoginBodyType, LoginResType, LogoutBodyType, RefreshTokenBodyType, RefreshTokenResType } from "@/schema/auth";

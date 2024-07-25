@@ -65,7 +65,15 @@ const nextConfig = {
     fetches: {
       fullUrl: true,
     },
-  }
+  },
+  i18n: {
+    locales: ['en-US', 'fr', 'nl-NL'],
+    // This is the default locale you want to be used when visiting
+    // a non-locale prefixed path e.g. `/hello`
+    defaultLocale: 'fr',
+    localeDetection: false,
+  },
+  trailingSlash: true,
 };
 
 export default nextConfig;

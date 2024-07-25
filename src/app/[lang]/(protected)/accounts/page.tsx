@@ -12,34 +12,33 @@ import {
 
 import { Input } from '@/components/ui/input'
 import { CirclePlus } from 'lucide-react'
-import TableContainer from '@/components/shared/TableContainer'
-import { initialColumns } from './utils/columnData'
-import useCustomTable from '@/hooks/useCustomTable'
-import { useGetAccounts } from '@/services/accounts'
+import { Locale } from '@/core/i18n/i18n.config'
+import { getDictionary } from '@/lib/dictionaries'
+import AccountContent from './AccountContent'
 
-const AccoutPages = () => {
-  const { data } = useGetAccounts()
-  const { tableInstance, columns } = useCustomTable({ initialColumns, initialData: data ?? [], enableSorting: true })
-
+const AccoutPages = async ({ params: { lang }} : {
+   params: { lang: Locale }
+}) => {
+  const { page } = await getDictionary(lang)
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Tài khoản</CardTitle>
+        <CardTitle>{page.accounts.title}</CardTitle>
         <CardDescription>
-          Quản lý tài khoản nhân viên
+          {page.accounts.description}
         </CardDescription>
         <CardContent>
           <div className='flex items-center justify-between mb-5' >
-            <div className='max-w-[60%] w-[60%]' >
+            {/* <div className='max-w-[60%] w-[60%]' >
               <Input placeholder='search name' onChange={(e) => {
                 tableInstance.getColumn('name')?.setFilterValue(e.target.value)
               }} />
-            </div>
+            </div> */}
             <Button className='bg-white' >
-            <CirclePlus /> Tạo tài khoản
+            <CirclePlus /> {page.accounts.createAccount}
             </Button>
           </div>
-          <TableContainer columns={columns} table={tableInstance} />
+          <AccountContent />
         </CardContent>
       </CardHeader>
     </Card>
