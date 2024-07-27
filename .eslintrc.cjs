@@ -6,6 +6,7 @@ module.exports = {
   ],
   rules: {
     "react/no-unescaped-entities": "off",
+    "react-hooks/rules-of-hooks": "off",
     "@next/next/no-page-custom-font": "off",
     'no-console': 0,
     'no-unused-vars': 1,

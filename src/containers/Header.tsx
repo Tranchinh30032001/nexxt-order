@@ -2,6 +2,7 @@ import React from 'react'
 import { Navbar } from './Navbar'
 import { ModeToggle } from '@/components/ToogleDarkMode'
 import DropDownUser from './DropDownUser'
+import LocaleSwitcher from '@/components/LocaleSwitcher'
 
 const Header = () => {
   return (
@@ -11,6 +12,7 @@ const Header = () => {
         <div className='flex items-center gap-4' >
           <ModeToggle />
           <DropDownUser />
+          <LocaleSwitcher />
         </div>
       </div>
     </section>

@@ -1,0 +1,12 @@
+{
+  "AccountPage": {
+    "title": "Tài khoản",
+    "description": "Đây là trang quản lý Accounts",
+    "addAccount": "Tạo tài khoản",
+    "column": {
+      "email": "Email",
+      "name": "Tên",
+      "avatar": "Ảnh đại diện"
+    }
+  }
+}
