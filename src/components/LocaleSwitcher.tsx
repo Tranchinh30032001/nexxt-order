@@ -1,6 +1,6 @@
 'use client'
 
-import React, { startTransition } from 'react'
+import React, { startTransition, useTransition } from 'react'
 
 import {
   Select,
@@ -12,10 +12,12 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Locale, setUserLocale } from '@/lib/locale'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
+import { locales } from '@/i18n'
 
 const LocaleSwitcher = () => {
   const locale = useLocale()
+  const t = useTranslations('Language')
 
   const onSelectChange = (value: string) => {
     const locale = value as Locale
@@ -31,9 +33,14 @@ const LocaleSwitcher = () => {
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Language</SelectLabel>
-          <SelectItem value="en">EN</SelectItem>
-          <SelectItem value="vi">VI</SelectItem>
+          <SelectLabel>{t('language')}</SelectLabel>
+          { locales.map((cur) => {
+            return (
+              <SelectItem key={cur} value={cur}>
+                {t('locale', { locale: cur })}
+              </SelectItem>
+            )
+          })}
         </SelectGroup>
       </SelectContent>
     </Select>

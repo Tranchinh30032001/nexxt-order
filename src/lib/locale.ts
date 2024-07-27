@@ -1,11 +1,10 @@
 'use server';
 
+import { locales } from '@/i18n';
 import {cookies} from 'next/headers';
 
 
-export type Locale = (typeof locales)[number];
-
-const locales = ['en', 'vi'] as const;
+export type Locale = (typeof locales)[number]
 const defaultLocale: Locale = 'en';
 
 // In this example the locale is read from a cookie. You could alternatively

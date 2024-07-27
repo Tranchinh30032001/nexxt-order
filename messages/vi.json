@@ -8,5 +8,9 @@
       "name": "Tên",
       "avatar": "Ảnh đại diện"
     }
+  },
+  "Language": {
+    "locale": "{locale, select, en {🇺🇸 Tiếng Anh} vi {🇻🇳 Tiếng Việt} other {Không biêt}}",
+    "language": "Ngôn ngữ"
   }
 }
